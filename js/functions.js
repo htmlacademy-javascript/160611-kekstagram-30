@@ -1,8 +1,9 @@
 // Функция для проверки длины строки.
-const isShorterOrEquals = (string, requiredLength) => string.length <= requiredLength;
+function isShorterOrEquals(string, requiredLength) {
+  return string.length <= requiredLength;
+}
 
-// console.log(isShorterOrEquals('Кекстаграм', 20));
-
+isShorterOrEquals('Кекстаграм', 20);
 
 // Функция для проверки, является ли строка палиндромом.
 function isPalindrome(string) {
@@ -17,33 +18,27 @@ function isPalindrome(string) {
   return reversedString === normalizedString;
 }
 
-// console.log(isPalindrome('Лёша на полке клопа нашёл'));
-
+isPalindrome('Лёша на полке клопа нашёл');
 
 // Функция которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9
 // и возвращает их в виде целого положительного числа.
-function getIntegerFromString(string) {
+function extractNumbersFromString(string) {
 
-  let numberString = '';
+  let stringOfNumbers = '';
 
-  if (typeof string === 'number') {
-    numberString = string.toString();
-
-    // Убираем знак минус и точку, если в качестве параметра передана дробь.
-    numberString = numberString.replace('-', '').replace('.', '');
-
-  } else if (typeof string === 'string') {
+  if (typeof string === 'string') {
     const normalizedString = string.replaceAll(' ', '');
 
     for (let i = 0; i < normalizedString.length; i++) {
       if (!Number.isNaN(parseInt(normalizedString[i], 10))) {
-        numberString += normalizedString[i];
+        stringOfNumbers += normalizedString[i];
       }
     }
-
-  } // В остальных случаях numberString так и останется пустой строкой, что в итоге даст NaN.
-
-  return parseInt(numberString, 10);
+  } else if (typeof string === 'number') {
+    stringOfNumbers = string.toString();
+    stringOfNumbers = stringOfNumbers.replace('-', '').replace('.', '');
+  }
+  return parseInt(stringOfNumbers, 10);
 }
 
-// console.log(getIntegerFromString(-0.5));
+extractNumbersFromString(-0.5);
